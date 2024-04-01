@@ -1,0 +1,26 @@
+Flask - for creating the web application.
+moviepy - for video editing tasks.
+
+Without Python package:  install ImageMagick
+
+
+
+Guide for Postman
+
+Set the Headers:
+#	Go to the "Headers" tab in the section below the URL field.
+#	set Key to Content-Type and Value to application/json.
+
+
+Configure the Request Body:
+
+#	Switch to the "Body" tab.
+#	Select the "raw" option.
+#	From the dropdown menu on the right (which may initially say "Text"), select JSON.
+#	enter your JSON data
+
+
+
+http://127.0.0.1:5000/generate-video
+
+
