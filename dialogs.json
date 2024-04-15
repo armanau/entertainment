@@ -1,0 +1,7 @@
+{
+  "dialogs": [
+    {"id": 1, "name": "Alice", "text": "Hello, how are you?"},
+    {"id": 2, "name": "Bob", "text": "Hi Alice, I'm fine. How about you?"},
+    {"id": 3, "name": "Charlie", "text": "Hey everyone, what's up?"}
+  ]
+}
