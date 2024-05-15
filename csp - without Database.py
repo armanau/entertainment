@@ -2,8 +2,10 @@ from flask import Flask, request, jsonify
 import os
 from datetime import datetime
 from moviepy.editor import *
-from PIL import Image, ImageDraw, ImageFont
-import numpy as np
+from moviepy.config import change_settings
+
+# Configure ImageMagick binary location for Windows
+change_settings({"IMAGEMAGICK_BINARY": r"C:\Program Files\ImageMagick-7.1.1-Q16-HDRI\magick.exe"})
 
 app = Flask(__name__)
 
@@ -36,24 +38,8 @@ def create_video_clips(story_data, background_image_path):
             text = f"{character}: {sentence}"
             try:
                 # Ensure you have a background image at the specified path
+                text_clip = TextClip(text, fontsize=24, color='white', bg_color='black').set_position('center').set_duration(2)
                 background_clip = ImageClip(background_image_path).set_duration(2)
-                
-                # Create a PIL image for text overlay
-                img = background_clip.get_frame(0)  # Get the first frame to determine image size
-                pil_img = Image.fromarray(img)
-                draw = ImageDraw.Draw(pil_img)
-                
-                # Use a system font for text rendering
-                font_size = 72  # Adjust the font size as needed
-                font = ImageFont.load_default()  # This uses the default system font
-                
-                draw.text((80, 80), text, fill='white', font=font)
-                
-                # Convert PIL image to numpy array for MoviePy
-                text_img = np.array(pil_img)
-                text_clip = ImageClip(text_img).set_duration(2)
-                
-                # Combine text and background clips
                 combined_clip = CompositeVideoClip([background_clip, text_clip])
                 clips.append(combined_clip)
             except Exception as e:
